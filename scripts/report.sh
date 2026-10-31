@@ -46,7 +46,7 @@ if [ -z "$KEY" ]; then
 fi
 
 PROJECT_PATH="${INPUT_PATH:-.}"
-VERSION="${INPUT_VERSION:-0.3.4}"
+VERSION="${INPUT_VERSION:-0.3.5}"
 FORMATS="${INPUT_REPORT_FORMATS:-html,pdf,notices,sbom-cyclonedx,sbom-spdx}"
 REPORT_DIR="${INPUT_REPORT_OUT:-}"
 [ -n "$REPORT_DIR" ] || REPORT_DIR="${RUNNER_TEMP:-/tmp}/licenseproof-full-report"
