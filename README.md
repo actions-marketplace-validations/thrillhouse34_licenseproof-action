@@ -2,6 +2,10 @@
 
 Know every license in your dependency tree — before your customer's lawyer asks.
 
+**Free** to scan, forever. The audit-ready HTML and PDF report, `THIRD_PARTY_NOTICES`
+and SPDX SBOM are **$29 one-time** — perpetual license, no subscription.
+[See a real report &rarr;](https://licenseproof.dev/report-sample)
+
 This action runs the [`licenseproof`](https://www.npmjs.com/package/licenseproof) CLI
 against your checked-out repository, writes the result to the job summary, uploads it
 as a build artifact, and fails the job when it finds something you said you cared about.

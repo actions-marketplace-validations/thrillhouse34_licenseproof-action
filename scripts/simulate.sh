@@ -146,6 +146,11 @@ INPUT_PATH="fixtures/sample-repo" INPUT_FAIL_ON="never" \
 
 if grep -q "Get the full report" "$GITHUB_STEP_SUMMARY"; then ok "upsell shown without a key"; else fail "upsell missing from the job summary"; fi
 if grep -q "licenseproof.dev" "$GITHUB_STEP_SUMMARY"; then ok "upsell links the existing purchase page"; else fail "upsell has no licenseproof.dev link"; fi
+# Price and sample link: the two things that turn "there is a paid tier" into a
+# decision someone can actually make from the job summary. -F, because '$29'
+# would otherwise be a positional-parameter expansion away from matching "9".
+if grep -qF '$29' "$GITHUB_STEP_SUMMARY"; then ok "upsell quotes the price"; else fail "upsell does not name the price"; fi
+if grep -qF 'https://licenseproof.dev/report-sample' "$GITHUB_STEP_SUMMARY"; then ok "upsell links the sample report"; else fail "upsell has no sample-report link"; fi
 
 echo
 echo "== case 6: no upsell once a key is configured =="

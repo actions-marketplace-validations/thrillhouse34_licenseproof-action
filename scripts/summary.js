@@ -90,9 +90,13 @@ if (r.warnings && r.warnings.length) {
 if (!hasKey) {
   out.push('---');
   out.push('');
+  // The price and the sample URL are the ones on licenseproof.dev ($29
+  // Individual, /report-sample). Quoted in README.md too — change both together.
   out.push(
     '**Get the full report** — a lawyer-ready HTML and PDF report, a `THIRD_PARTY_NOTICES` file, ' +
-      'and an SPDX SBOM, regenerated on every run. Perpetual license, no subscription: ' +
+      'and an SPDX SBOM, regenerated on every run. ' +
+      '**$29 one-time**, perpetual license, no subscription — ' +
+      '[see a real report](https://licenseproof.dev/report-sample) · ' +
       '[licenseproof.dev](https://licenseproof.dev)',
   );
   out.push('');
