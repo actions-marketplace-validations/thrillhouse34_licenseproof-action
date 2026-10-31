@@ -219,6 +219,42 @@ The action exits with the CLI's own code, so the job status follows it:
 
 A failing scan still produces the artifact. That's the run you want it for.
 
+## Not on GitHub Actions?
+
+This action is only a thin wrapper around the published CLI, so the same checks
+run anywhere Node 22 runs — no action needed.
+
+### GitLab CI
+
+```yaml
+licenseproof:
+  image: node:22
+  stage: test
+  script:
+    - npm ci
+    - npx --yes licenseproof@0.3.5 scan --fail-on conflict
+    - npx --yes licenseproof@0.3.5 report --format sbom-cyclonedx --out sbom.cdx.json
+  artifacts:
+    paths: [sbom.cdx.json]
+# Paid: add a masked CI/CD variable LICENSEPROOF_KEY and use --format notices,html,pdf --out licenseproof-reports
+```
+
+### Plain CLI
+
+```bash
+npx licenseproof scan                     # exit 1 on CONFLICT packages (default --fail-on conflict)
+npx licenseproof scan --format json       # machine-readable
+npx licenseproof report --format sbom-cyclonedx --out sbom.cdx.json     # free
+LICENSEPROOF_KEY=... npx licenseproof report --format notices,html,pdf --out reports   # paid
+```
+
+**Python projects:** install the dependencies into `.venv` first
+(`python -m venv .venv && .venv/bin/pip install -r requirements.txt`), so
+licenses resolve from the installed metadata on disk.
+
+The exit codes are the same ones in the table above, so any runner can gate on
+them the way this action does.
+
 ## Notes
 
 - Scanning is fully offline. The only network call is `npx` fetching the pinned
@@ -276,4 +312,4 @@ comes from the repository name. The README's usage examples stay correct.
 
 ## License
 
-Elastic License 2.0 — see [LICENSE](LICENSE). Source-available, not open source.
+Source-available under the Elastic License 2.0 (SPDX: `Elastic-2.0`). See [LICENSE](LICENSE).
